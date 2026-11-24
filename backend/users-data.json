@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin User",
+      "email": "admin@cloudorder.com",
+      "password": "$2b$10$W4Z5PfzrKnc4za6ddtPw/uYgtGBkCfxT1tMdQNJJ8ctqWpYFbEKc.",
+      "role": "admin",
+      "createdAt": "2026-11-24T00:00:00.000Z",
+      "updatedAt": "2026-11-24T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Standard User",
+      "email": "user@cloudorder.com",
+      "password": "$2b$10$ulysnHSZUKUlCrVr/NfVCu5X6d4xRR4b1o3U2gFTJSG3ocJ3nikqi",
+      "role": "user",
+      "createdAt": "2026-11-24T00:00:00.000Z",
+      "updatedAt": "2026-11-24T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Mamender Shaw",
+      "email": "mamendershaw@gmail.com",
+      "password": "$2b$10$RKkmLDJjkzoirxDX.IBc7.tPIGdSMmDnc5WM4L1D0SPzFeXV3XESy",
+      "role": "admin",
+      "createdAt": "2026-11-24T05:02:04.021Z",
+      "updatedAt": "2026-11-24T05:02:04.021Z"
+    }
+  ],
+  "total": 3
+}
