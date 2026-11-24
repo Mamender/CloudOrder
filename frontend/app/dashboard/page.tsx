@@ -6,9 +6,10 @@ import { useAuth } from '@/context/AuthContext';
 import { Navbar } from '@/components/Navbar';
 import { ProductCard } from '@/components/ProductCard';
 import { AddProductModal } from '@/components/AddProductModal';
+import { EditProductModal } from '@/components/EditProductModal';
 import { Alert } from '@/components/Alert';
 import { api } from '@/lib/api';
-import { Product, CreateProductInput } from '@/types';
+import { Product, CreateProductInput, UpdateProductInput } from '@/types';
 
 export default function DashboardPage() {
   const { user, isLoading: authLoading, isAdmin } = useAuth();
@@ -20,6 +21,7 @@ export default function DashboardPage() {
   const [search, setSearch] = useState<string>('');
   const [category, setCategory] = useState<string>('all');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [alert, setAlert] = useState<{ type: 'error' | 'success'; message: string } | null>(null);
 
   // Protected route check
@@ -114,6 +116,25 @@ export default function DashboardPage() {
         type: 'error',
         message,
       });
+    }
+  };
+
+  // Admin Update Product Handler
+  const handleUpdateProduct = async (id: number, input: UpdateProductInput) => {
+    try {
+      const res = await api.updateProduct(id, input);
+      setAlert({
+        type: 'success',
+        message: `Product #${id} ("${res.data?.title || 'Product'}") updated successfully!`,
+      });
+      loadProducts();
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to update product';
+      setAlert({
+        type: 'error',
+        message,
+      });
+      throw err;
     }
   };
 
@@ -218,6 +239,7 @@ export default function DashboardPage() {
                 key={product.id}
                 product={product}
                 isAdmin={isAdmin}
+                onEdit={setEditingProduct}
                 onDelete={handleDeleteProduct}
               />
             ))}
@@ -227,11 +249,19 @@ export default function DashboardPage() {
 
       {/* Add Product Modal (Admin Only) */}
       {isAdmin && (
-        <AddProductModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onSubmit={handleAddProduct}
-        />
+        <>
+          <AddProductModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onSubmit={handleAddProduct}
+          />
+          <EditProductModal
+            isOpen={Boolean(editingProduct)}
+            product={editingProduct}
+            onClose={() => setEditingProduct(null)}
+            onSubmit={handleUpdateProduct}
+          />
+        </>
       )}
     </div>
   );

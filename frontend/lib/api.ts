@@ -1,4 +1,4 @@
-import { ApiResponse, AuthResponseData, CreateProductInput, Product, User } from '@/types';
+import { ApiResponse, AuthResponseData, CreateProductInput, UpdateProductInput, Product, User } from '@/types';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
@@ -104,6 +104,13 @@ class ApiClient {
   public async deleteProduct(id: number): Promise<ApiResponse<Product>> {
     return this.request<Product>(`/products/${id}`, {
       method: 'DELETE',
+    });
+  }
+
+  public async updateProduct(id: number, payload: UpdateProductInput): Promise<ApiResponse<Product>> {
+    return this.request<Product>(`/products/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(payload),
     });
   }
 }

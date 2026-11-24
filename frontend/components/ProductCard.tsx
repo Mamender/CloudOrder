@@ -6,10 +6,11 @@ import { Product } from '@/types';
 interface ProductCardProps {
   product: Product;
   isAdmin: boolean;
+  onEdit?: (product: Product) => void;
   onDelete: (id: number) => Promise<void>;
 }
 
-export function ProductCard({ product, isAdmin, onDelete }: ProductCardProps) {
+export function ProductCard({ product, isAdmin, onEdit, onDelete }: ProductCardProps) {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
@@ -75,13 +76,23 @@ export function ProductCard({ product, isAdmin, onDelete }: ProductCardProps) {
       {isAdmin && (
         <div className="px-5 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
           <span className="text-xs text-slate-500 font-mono">ID: #{product.id}</span>
-          <button
-            onClick={handleDelete}
-            disabled={isDeleting}
-            className="text-xs font-semibold px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 rounded-md transition duration-150 disabled:opacity-50 border border-red-200"
-          >
-            {isDeleting ? 'Deleting...' : 'Delete Product'}
-          </button>
+          <div className="flex items-center gap-2">
+            {onEdit && (
+              <button
+                onClick={() => onEdit(product)}
+                className="text-xs font-semibold px-3 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded-md transition duration-150 border border-indigo-200 cursor-pointer"
+              >
+                Edit
+              </button>
+            )}
+            <button
+              onClick={handleDelete}
+              disabled={isDeleting}
+              className="text-xs font-semibold px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 rounded-md transition duration-150 disabled:opacity-50 border border-red-200 cursor-pointer"
+            >
+              {isDeleting ? 'Deleting...' : 'Delete'}
+            </button>
+          </div>
         </div>
       )}
     </div>

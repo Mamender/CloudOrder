@@ -20,3 +20,5 @@ Status values: `PENDING`, `IN PROGRESS`, `DONE`, `BLOCKED`
 | `TASK-008` | `REQ-004` | Frontend Login & Registration UI | `DONE` | Build responsive login and registration pages with validation and error messaging. |
 | `TASK-009` | `REQ-004` | Frontend Role-Aware Dashboard | `DONE` | Build dashboard view: product catalog for regular users, and add/delete management capabilities for admins. |
 | `TASK-010` | `REQ-005` | Create Root AI Documentation System | `DONE` | Create the 7 root markdown documentation files with verified project context, AI workflow rules, and task registries. |
+| `TASK-011` | `REQ-006` | Implement Product Update Endpoint & Service | `DONE` | Add `update` method in `ProductService`, `validateUpdateProduct` middleware, `updateProduct` controller handler, and `PUT`/`PATCH` routes restricted to admin. |
+| `TASK-012` | `REQ-006` | Implement Frontend Product Edit UI | `DONE` | Add `updateProduct` API client method, `UpdateProductInput` type, `EditProductModal` component, and Edit button handler in Dashboard. |

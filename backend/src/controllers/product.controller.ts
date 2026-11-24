@@ -118,3 +118,39 @@ export const deleteProduct = async (
     next(error);
   }
 };
+
+export const updateProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const idParam = typeof req.params.id === 'string' ? req.params.id : '';
+    const id = idParam ? parseInt(idParam, 10) : NaN;
+    if (isNaN(id)) {
+      res.status(400).json({
+        success: false,
+        message: 'Invalid product ID. Must be a number.',
+      });
+      return;
+    }
+
+    const updatedProduct = await productService.update(id, req.body);
+
+    if (!updatedProduct) {
+      res.status(404).json({
+        success: false,
+        message: `Product with ID ${id} not found`,
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Product updated successfully',
+      data: updatedProduct,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

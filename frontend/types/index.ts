@@ -56,3 +56,5 @@ export interface CreateProductInput {
   stock: number;
   brand?: string;
 }
+
+export type UpdateProductInput = Partial<CreateProductInput>;

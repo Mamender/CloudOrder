@@ -73,3 +73,18 @@ This document tracks all project requirements, acceptance criteria, priorities, 
   - Existing implementation audited and documented.
   - No application code modified without prior approval.
 - **Related Tasks**: `TASK-010`
+
+---
+
+### REQ-006: Product Update API & Frontend Edit UI
+- **Priority**: HIGH
+- **Status**: DONE
+- **Description**: Provide RESTful API endpoint in Express backend to update existing product data in `product-data.json`, and frontend edit interface for administrators.
+- **Acceptance Criteria**:
+  - `PUT /api/products/:id` (and `PATCH /api/products/:id`): Updates fields of an existing product.
+  - Restricted to authenticated `admin` users via RBAC.
+  - Validates numeric ID and body payload.
+  - Automatically updates `meta.updatedAt` timestamp.
+  - Returns `404 Not Found` if product ID does not exist, `400 Bad Request` for invalid input, and `200 OK` on success.
+  - Frontend provides `Edit` button for admins on product cards with pre-filled `EditProductModal` and real-time list update.
+- **Related Tasks**: `TASK-011`, `TASK-012`

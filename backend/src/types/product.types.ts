@@ -52,3 +52,5 @@ export interface ProductDataPayload {
 }
 
 export type CreateProductDTO = Omit<Product, 'id'> & { id?: number };
+
+export type UpdateProductDTO = Partial<Omit<Product, 'id'>>;

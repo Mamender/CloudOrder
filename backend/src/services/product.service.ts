@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import { config } from '../config/index.js';
-import type { Product, ProductDataPayload, CreateProductDTO } from '../types/product.types.js';
+import type { Product, ProductDataPayload, CreateProductDTO, UpdateProductDTO } from '../types/product.types.js';
 
 class ProductService {
   private filePath: string;
@@ -97,6 +97,39 @@ class ProductService {
 
     await this.writeData(data);
     return newProduct;
+  }
+
+  public async update(id: number, updates: UpdateProductDTO): Promise<Product | null> {
+    const data = await this.readData();
+    const index = data.products.findIndex((p) => p.id === id);
+
+    if (index === -1) {
+      return null;
+    }
+
+    const existingProduct = data.products[index];
+    if (!existingProduct) {
+      return null;
+    }
+
+    const updatedProduct: Product = {
+      ...existingProduct,
+      ...updates,
+      id: existingProduct.id, // ID remains immutable
+      meta: {
+        ...(existingProduct.meta || {
+          createdAt: new Date().toISOString(),
+          barcode: '',
+          qrCode: '',
+        }),
+        ...(updates.meta || {}),
+        updatedAt: new Date().toISOString(),
+      },
+    };
+
+    data.products[index] = updatedProduct;
+    await this.writeData(data);
+    return updatedProduct;
   }
 
   public async delete(id: number): Promise<Product | null> {

@@ -8,6 +8,19 @@ Format: Chronological, grouped by release/phase with requirement and task refere
 
 ## [Unreleased]
 
+### Added
+- **Backend Product Update Endpoint**:
+  - Added `update(id, updates)` in `ProductService` updating `meta.updatedAt` and persisting to `product-data.json`.
+  - Added `validateUpdateProduct` middleware in `validate.middleware.ts` to validate update request payload.
+  - Added `updateProduct` controller in `product.controller.ts`.
+  - Registered `PUT /api/products/:id` and `PATCH /api/products/:id` in `product.routes.ts` protected by `authenticate` and `authorize(['admin'])`.
+- **Frontend Product Edit Interface**:
+  - Added `UpdateProductInput` type definition in `frontend/types/index.ts`.
+  - Added `api.updateProduct(id, payload)` client method in `frontend/lib/api.ts`.
+  - Created `EditProductModal` component in `frontend/components/EditProductModal.tsx`.
+  - Added "Edit" action button to `ProductCard` for admins and hooked up update state flow in `DashboardPage`.
+
+---
 ### 2026-11-24 – Frontend Dashboard & Authentication Integration
 - **Requirements**: `REQ-004`
 - **Tasks**: `TASK-007`, `TASK-008`, `TASK-009`

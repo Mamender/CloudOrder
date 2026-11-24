@@ -4,8 +4,9 @@ import {
   getProductById,
   createProduct,
   deleteProduct,
+  updateProduct,
 } from '../controllers/product.controller.js';
-import { validateCreateProduct } from '../middlewares/validate.middleware.js';
+import { validateCreateProduct, validateUpdateProduct } from '../middlewares/validate.middleware.js';
 import { authenticate, authorize } from '../middlewares/auth.middleware.js';
 
 const router = Router();
@@ -27,6 +28,8 @@ router.get('/:id', authorize(['admin', 'user']), getProductById);
 
 // Manage products - 'admin' only
 router.post('/', authorize(['admin']), validateCreateProduct, createProduct);
+router.put('/:id', authorize(['admin']), validateUpdateProduct, updateProduct);
+router.patch('/:id', authorize(['admin']), validateUpdateProduct, updateProduct);
 router.delete('/:id', authorize(['admin']), deleteProduct);
 
 export default router;
