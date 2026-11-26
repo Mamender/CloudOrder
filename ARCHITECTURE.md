@@ -32,6 +32,10 @@ flowchart LR
 
 ```text
 cloudorder/
+├── .github/
+│   └── workflows/             # GitHub Actions CI/CD pipelines
+│       ├── frontend-ci.yml    # Next.js lint and build pipeline
+│       └── backend-ci.yml     # Express TypeScript build pipeline
 ├── AGENTS.md                  # Mandatory AI rules and instructions
 ├── PROJECT_CONTEXT.md         # Project background, goals, and tech stack
 ├── ARCHITECTURE.md            # Architecture, system design, and folder layout

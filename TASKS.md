@@ -22,3 +22,6 @@ Status values: `PENDING`, `IN PROGRESS`, `DONE`, `BLOCKED`
 | `TASK-010` | `REQ-005` | Create Root AI Documentation System | `DONE` | Create the 7 root markdown documentation files with verified project context, AI workflow rules, and task registries. |
 | `TASK-011` | `REQ-006` | Implement Product Update Endpoint & Service | `DONE` | Add `update` method in `ProductService`, `validateUpdateProduct` middleware, `updateProduct` controller handler, and `PUT`/`PATCH` routes restricted to admin. |
 | `TASK-012` | `REQ-006` | Implement Frontend Product Edit UI | `DONE` | Add `updateProduct` API client method, `UpdateProductInput` type, `EditProductModal` component, and Edit button handler in Dashboard. |
+| `TASK-013` | `REQ-007` | Configure Frontend CI Workflow | `DONE` | Create `.github/workflows/frontend-ci.yml` with checkout, Node setup, dependency caching, linting, and build steps. |
+| `TASK-014` | `REQ-007` | Configure Backend CI Workflow | `DONE` | Create `.github/workflows/backend-ci.yml` with checkout, Node setup, dependency caching, and TypeScript build steps. |
+| `TASK-015` | `REQ-007` | Verify and Document CI Workflows | `DONE` | Validate YAML configurations, verify package scripts alignment, and update project architecture and changelog. |

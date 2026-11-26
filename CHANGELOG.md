@@ -8,17 +8,41 @@ Format: Chronological, grouped by release/phase with requirement and task refere
 
 ## [Unreleased]
 
-### Added
-- **Backend Product Update Endpoint**:
-  - Added `update(id, updates)` in `ProductService` updating `meta.updatedAt` and persisting to `product-data.json`.
-  - Added `validateUpdateProduct` middleware in `validate.middleware.ts` to validate update request payload.
-  - Added `updateProduct` controller in `product.controller.ts`.
-  - Registered `PUT /api/products/:id` and `PATCH /api/products/:id` in `product.routes.ts` protected by `authenticate` and `authorize(['admin'])`.
-- **Frontend Product Edit Interface**:
-  - Added `UpdateProductInput` type definition in `frontend/types/index.ts`.
-  - Added `api.updateProduct(id, payload)` client method in `frontend/lib/api.ts`.
-  - Created `EditProductModal` component in `frontend/components/EditProductModal.tsx`.
-  - Added "Edit" action button to `ProductCard` for admins and hooked up update state flow in `DashboardPage`.
+---
+
+### 2026-11-24 – Configure GitHub Actions CI Pipelines for Frontend & Backend
+- **Requirements**: `REQ-007`
+- **Tasks**: `TASK-013`, `TASK-014`, `TASK-015`
+- **Changes**:
+  - Created [.github/workflows/frontend-ci.yml](file:///Users/mshaw/cloudorder/.github/workflows/frontend-ci.yml):
+    - Triggers on `push` and `pull_request` to `main` when changes affect `frontend/**` or `.github/workflows/frontend-ci.yml`.
+    - Enables manual trigger with `workflow_dispatch`.
+    - Configured Node 22 runtime with npm dependency caching keyed to `frontend/package-lock.json`.
+    - Runs clean dependency install (`npm ci`), linting (`npm run lint`), and Next.js build (`npm run build`).
+  - Created [.github/workflows/backend-ci.yml](file:///Users/mshaw/cloudorder/.github/workflows/backend-ci.yml):
+    - Triggers on `push` and `pull_request` to `main` when changes affect `backend/**` or `.github/workflows/backend-ci.yml`.
+    - Enables manual trigger with `workflow_dispatch`.
+    - Configured Node 22 runtime with npm dependency caching keyed to `backend/package-lock.json`.
+    - Runs clean dependency install (`npm ci`) and TypeScript compiler build (`npm run build`).
+- **Verification**: Validated YAML syntax and structure, verified path filters, and matched job steps to existing package.json scripts in frontend and backend.
+
+---
+
+### 2026-11-24 – Backend Product Update API & Frontend Edit UI
+- **Requirements**: `REQ-006`
+- **Tasks**: `TASK-011`, `TASK-012`
+- **Changes**:
+  - **Backend Product Update Endpoint**:
+    - Added `update(id, updates)` in `ProductService` updating `meta.updatedAt` and persisting to `product-data.json`.
+    - Added `validateUpdateProduct` middleware in `validate.middleware.ts` to validate update request payload.
+    - Added `updateProduct` controller in `product.controller.ts`.
+    - Registered `PUT /api/products/:id` and `PATCH /api/products/:id` in `product.routes.ts` protected by `authenticate` and `authorize(['admin'])`.
+  - **Frontend Product Edit Interface**:
+    - Added `UpdateProductInput` type definition in `frontend/types/index.ts`.
+    - Added `api.updateProduct(id, payload)` client method in `frontend/lib/api.ts`.
+    - Created `EditProductModal` component in `frontend/components/EditProductModal.tsx`.
+    - Added "Edit" action button to `ProductCard` for admins and hooked up update state flow in `DashboardPage`.
+
 
 ---
 ### 2026-11-24 – Frontend Dashboard & Authentication Integration

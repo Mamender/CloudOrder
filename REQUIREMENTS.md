@@ -88,3 +88,20 @@ This document tracks all project requirements, acceptance criteria, priorities, 
   - Returns `404 Not Found` if product ID does not exist, `400 Bad Request` for invalid input, and `200 OK` on success.
   - Frontend provides `Edit` button for admins on product cards with pre-filled `EditProductModal` and real-time list update.
 - **Related Tasks**: `TASK-011`, `TASK-012`
+
+---
+
+### REQ-007: GitHub Actions CI Pipelines for Frontend & Backend
+- **Priority**: HIGH
+- **Status**: DONE
+- **Description**: Provide automated Continuous Integration (CI) using GitHub Actions for the monorepo, maintaining separate workflows for `frontend` and `backend`.
+- **Acceptance Criteria**:
+  - Independent workflows created in `.github/workflows/frontend-ci.yml` and `.github/workflows/backend-ci.yml`.
+  - Frontend CI triggers on pushes and pull requests to `main` impacting `frontend/**` or `.github/workflows/frontend-ci.yml`.
+  - Backend CI triggers on pushes and pull requests to `main` impacting `backend/**` or `.github/workflows/backend-ci.yml`.
+  - Manual execution supported via `workflow_dispatch`.
+  - Node.js setup with dependency caching via npm.
+  - Frontend CI runs dependency installation (`npm ci`), linting (`npm run lint`), and Next.js production build (`npm run build`).
+  - Backend CI runs dependency installation (`npm ci`) and TypeScript compilation (`npm run build`).
+- **Related Tasks**: `TASK-013`, `TASK-014`, `TASK-015`
+
