@@ -8,7 +8,7 @@
       "price": 29.99,
       "discountPercentage": 18.19,
       "rating": 2.86,
-      "stock": 4,
+      "stock": 7,
       "tags": [
         "beauty",
         "eyeshadow"
@@ -51,7 +51,7 @@
       "minimumOrderQuantity": 20,
       "meta": {
         "createdAt": "2024-12-03T11:29:45.706Z",
-        "updatedAt": "2026-11-24T06:09:45.593Z",
+        "updatedAt": "2026-11-26T06:06:34.300Z",
         "barcode": "9170275171413",
         "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
       },
@@ -68,7 +68,7 @@
       "price": 14.99,
       "discountPercentage": 9.84,
       "rating": 4.64,
-      "stock": 89,
+      "stock": 90,
       "tags": [
         "beauty",
         "face powder"
@@ -111,7 +111,7 @@
       "minimumOrderQuantity": 22,
       "meta": {
         "createdAt": "2025-01-08T18:30:12.844Z",
-        "updatedAt": "2025-11-26T14:49:26.980Z",
+        "updatedAt": "2026-11-26T06:06:26.530Z",
         "barcode": "8418883906837",
         "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
       },

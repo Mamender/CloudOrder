@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Product, UpdateProductInput } from '@/types';
 import { Alert } from '@/components/Alert';
 
@@ -12,28 +12,33 @@ interface EditProductModalProps {
 }
 
 export function EditProductModal({ isOpen, product, onClose, onSubmit }: EditProductModalProps) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('groceries');
-  const [price, setPrice] = useState('');
-  const [stock, setStock] = useState('');
-  const [brand, setBrand] = useState('');
+  if (!isOpen || !product) return null;
+
+  return (
+    <EditProductForm
+      key={product.id}
+      product={product}
+      onClose={onClose}
+      onSubmit={onSubmit}
+    />
+  );
+}
+
+interface EditProductFormProps {
+  product: Product;
+  onClose: () => void;
+  onSubmit: (id: number, input: UpdateProductInput) => Promise<void>;
+}
+
+function EditProductForm({ product, onClose, onSubmit }: EditProductFormProps) {
+  const [title, setTitle] = useState(product.title || '');
+  const [description, setDescription] = useState(product.description || '');
+  const [category, setCategory] = useState(product.category || 'groceries');
+  const [price, setPrice] = useState(product.price !== undefined ? String(product.price) : '');
+  const [stock, setStock] = useState(product.stock !== undefined ? String(product.stock) : '');
+  const [brand, setBrand] = useState(product.brand || '');
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    if (product) {
-      setTitle(product.title || '');
-      setDescription(product.description || '');
-      setCategory(product.category || 'groceries');
-      setPrice(product.price !== undefined ? String(product.price) : '');
-      setStock(product.stock !== undefined ? String(product.stock) : '');
-      setBrand(product.brand || '');
-      setError('');
-    }
-  }, [product]);
-
-  if (!isOpen || !product) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
